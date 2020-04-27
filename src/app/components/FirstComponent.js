@@ -1,12 +1,11 @@
 import React from "react";
 
-class FirstComponent extends React.Component {
+export class FirstComponent extends React.Component {
 	render() {
 		return (
 			<div className="container">
-					hello World
+					<h1>{'hello World'}</h1>
 				</div>
 		);
 	}
 }
-export default FirstComponent;
