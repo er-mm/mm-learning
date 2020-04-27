@@ -1,4 +1,5 @@
 import React from "react";
-import FirstComponent from './components/FirstComponent';
+import { render } from "react-dom";
+import  { FirstComponent } from './components/FirstComponent'
 
 render(<FirstComponent />, window.document.getElementById("app"));

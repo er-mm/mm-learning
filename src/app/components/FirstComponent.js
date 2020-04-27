@@ -1,9 +1,12 @@
 import React from "react";
 
-export class FirstComponent extends React.Component {
+class FirstComponent extends React.Component {
 	render() {
 		return (
-			<>Hello World</>
+			<div className="container">
+					hello World
+				</div>
 		);
 	}
 }
+export default FirstComponent;
