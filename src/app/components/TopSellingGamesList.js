@@ -1,12 +1,14 @@
 import React from "react";
 import fetch from 'isomorphic-fetch';
+import { Details } from './Details';
 
 export class TopSellingGamesList extends React.Component {
 
     constructor() {
         super()
         this.state = {
-            allData: []
+            allData: [],
+            id: 0
         }
     }
 
@@ -20,13 +22,10 @@ export class TopSellingGamesList extends React.Component {
         })
             .then(data => data.json())
             .then((data) => {
-                console.log(data);
-                this.setState({ allData: data });
+                this.setState({ allData: data.filter((item) => item.Rank < 6) });
             }).catch(error => alert("Server is not sending response", error));
     }
     render() {
-        let topGames = [];
-
         return (
             <div>
                 {'Top Games'}
@@ -39,7 +38,24 @@ export class TopSellingGamesList extends React.Component {
     }
     renderTopGames(topGames) {
         return topGames.map((item) => {
-            return <li key={item.Rank}>{item.Name}</li>
+            return <div>
+            <li key={item.Rank} onClick={(e) => this.handleClick(item.Rank)}>{item.Name}</li>
+                {/* {this.renderDetails(item)} */}
+                {this.state.id === item.Rank
+                ? <Details moreDetails={item}/>
+            : <div></div>}
+            </div>
         });
     }
+    handleClick = (key) => {
+        console.log(key);
+        this.setState({id: key});
+    }
+    // renderDetails(item) {
+    //     return this.state.id === item.Rank
+    //     ? <div>
+    //         {`Year: ${item.Year}, Platform: ${item.Platform}, Genre: ${item.Genre}, Publisher: ${item.Publisher}, Global_Sales: ${item.Global_Sales}`}
+    //     </div>
+    //     : <div></div>
+    // }
 }
